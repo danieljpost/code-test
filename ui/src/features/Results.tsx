@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
+import { useDispatch } from "react-redux"; //
 import { useAppSelector } from "../app/hooks";
 import { toHhMmSs } from "../time";
-import { selectResults } from "./resultsSlice";
-import axios from 'axios';
+import { fetchResults, selectResults } from "./resultsSlice";
 import { RankedResult } from "./types";
 
 const Results = () => {
 
-  const [results, setResults] = useState([]);
+  const dispatch = useDispatch();
+  const resultsState = useAppSelector(state => state.results);
 
   useEffect(() => {
-
-    axios.get(`http://localhost:5000/results`)
-      .then(res => {
-        setResults(res.data);
-      })
-
-  }, []);
+    dispatch(fetchResults());
+  },[dispatch, resultsState]);
 
 
 
@@ -32,7 +28,7 @@ const Results = () => {
           </tr>
         </thead>
         <tbody>
-          {results.map((x: RankedResult) => (
+          {resultsState.data.map((x: RankedResult) => (
             <tr key={x.bib}>
               <td data-testclass='bib'>{x.bib}</td>
               <td data-testclass='name'>{x.name}</td>

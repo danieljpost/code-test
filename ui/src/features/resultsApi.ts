@@ -16,7 +16,7 @@ function addResult(result: UnrankedResult) {
 }
 
 function getResults() {
-  const ranked = [...UNRANKED_RESULTS];
+  const ranked: UnrankedResult[] = [];
 
   ranked.sort((a, b) => a.time < b.time
     ? -1
