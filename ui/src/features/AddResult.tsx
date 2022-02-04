@@ -1,11 +1,9 @@
 import React from "react"
 import { useAppDispatch } from "../app/hooks"
 import { toMillis } from "../time"
-import { addResult } from "./resultsSlice"
 import axios from 'axios';
 
 const AddResult = () => {
-  const dispatch = useAppDispatch()
 
   const [bib, setBib] = React.useState('')
   const [name, setName] = React.useState('')
@@ -18,7 +16,6 @@ const AddResult = () => {
       time: toMillis(time)
     })
     .then(function (response) {
-      console.log(response);
       setBib("");
       setName("");
       setTime("");
@@ -35,13 +32,6 @@ const AddResult = () => {
       const millis = toMillis(time)
       if (!isNaN(millis)) {
         postCall();
-        dispatch(
-          addResult({
-            bib,
-            name,
-            time: millis
-          })
-        )
       }
     }
   }
