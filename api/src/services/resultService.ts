@@ -31,7 +31,7 @@ export default class ResultService implements IResultService {
   async addResult(result: UnrankedResult): Promise<void> {
     UNRANKED_RESULTS.push(result);
     const connection = await startConnection();
-    await connection.query(`INSERT INTO results (bib, name, time) VALUES (${result.bib}, ${result.name}, ${result.time})`)
+    await connection.query(`INSERT INTO results (bib, name, time) VALUES (${result.bib}, ${result.name}, ${result.time})`);
   }
 
   async getRanked(): Promise<RankedResult[]> {
